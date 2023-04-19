@@ -3,6 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMainUserData } from '../../scripts/4_GetDataService/callMainUserData';
 import NotFound from '../NotFound/NotFound';
+import caloriesIcon from '../User/calories-icon.png';
+import proteinIcon from '../User/protein-icon.png';
+import glucidIcon from '../User/carbs-icon.png';
+import lipidIcon from '../User/fat-icon.png';
 
 /**
  * React component given the HTML structure of the user page
@@ -42,7 +46,29 @@ const User = () => {
   if (!isLoading && !error)
     return (
       <div>
-        <h1>{userMainData.firstName + ' ' + userMainData.lastName}</h1>
+        <h1>Bonjour {userMainData.firstName}</h1>
+        <aside>
+          <div className="aside-container" id="caloriesInfos">
+            <img src={caloriesIcon} alt="calories-icon" />
+            <h4>{userMainData.calorieCount.toLocaleString('en-US')}kCal</h4>
+            <p>Calories</p>
+          </div>
+          <div className="aside-container" id="ProteinesInfos">
+            <img src={proteinIcon} alt="proteines-icon" />
+            <h4>{userMainData.proteinCount.toLocaleString('en-US')}g</h4>
+            <p>Proteines</p>
+          </div>
+          <div className="aside-container" id="glucidsInfos">
+            <img src={glucidIcon} alt="glucids-icon" />
+            <h4>{userMainData.carbohydrateCount.toLocaleString('en-US')}g</h4>
+            <p>Glucides</p>
+          </div>
+          <div className="aside-container" id="lipidsInfos">
+            <img src={lipidIcon} alt="lipids-icon" />
+            <h4>{userMainData.lipidCount.toLocaleString('en-US')}g</h4>
+            <p>Lipides</p>
+          </div>
+        </aside>
       </div>
     );
 };

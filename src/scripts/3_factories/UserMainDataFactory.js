@@ -7,7 +7,7 @@ export class GetMainDataFromDB {
     switch (type) {
       case 'mocked':
         const data = new MockedDataApi(url)
-        const result = data.getUserNainDataMocked(id);
+        const result = data.getUserMainDataMocked(id);
         return result
       case 'backend-server':
         return console.log('not implemented yet');

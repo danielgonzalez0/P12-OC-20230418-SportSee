@@ -11,7 +11,7 @@ export class MockedDataApi extends Api {
    * @param {string} id
    * @returns {Array} array with user main data from mocked database
    */
-  async getUserNainDataMocked(id) {
+  async getUserMainDataMocked(id) {
     try {
       const data = await this.getData();
       if (data instanceof SpecificError === false) {
