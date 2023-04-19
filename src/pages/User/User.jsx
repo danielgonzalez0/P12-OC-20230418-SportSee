@@ -7,6 +7,7 @@ import caloriesIcon from '../User/calories-icon.png';
 import proteinIcon from '../User/protein-icon.png';
 import glucidIcon from '../User/carbs-icon.png';
 import lipidIcon from '../User/fat-icon.png';
+import ActivityChart from '../../components/activityChart/ActivityChart';
 
 /**
  * React component given the HTML structure of the user page
@@ -31,7 +32,7 @@ const User = () => {
       setErrorData(userMainData);
     } else {
       setUserMainData(userMainData);
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 
@@ -47,6 +48,9 @@ const User = () => {
     return (
       <div>
         <h1>Bonjour {userMainData.firstName}</h1>
+        <main>
+          <ActivityChart id={id}/>
+        </main>
         <aside>
           <div className="aside-container" id="caloriesInfos">
             <img src={caloriesIcon} alt="calories-icon" />

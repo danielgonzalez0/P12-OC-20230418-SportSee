@@ -27,4 +27,26 @@ export class MockedDataApi extends Api {
       return error;
     }
   }
+
+  /**
+   * get user main data from mocked database
+   * @param {string} id
+   * @returns {Array} array with user main data from mocked database
+   */
+  async getUserActivityDataMocked(id) {
+    try {
+      const data = await this.getData();
+      if (data instanceof SpecificError === false) {
+        const userDataArray = data.USER_ACTIVITY.filter(
+          (user) => user.userId === parseInt(id)
+        );
+        return userDataArray;
+      } else {
+        throw data;
+      }
+    } catch (err) {
+      const error = err;
+      return error;
+    }
+  }
 }
