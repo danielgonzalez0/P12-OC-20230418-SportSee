@@ -1,50 +1,48 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { getMainUserData } from '../../api_call/mockedData';
+import { getMainUserData } from '../../scripts/4_GetDataService/callMainUserData';
 import NotFound from '../NotFound/NotFound';
 
+/**
+ * React component given the HTML structure of the user page
+ * @returns {React.ReactElement} User
+ */
 const User = () => {
   const [userMainData, setUserMainData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setIsError] = useState(false);
+  const [errorData, setErrorData] = useState({});
   const { id } = useParams();
 
+  /**
+   * get user data from the API and handle errors
+   * @param {string} id
+   */
   const getUserData = async (id) => {
-    const dataArray = await getMainUserData(id);
-    if (dataArray.length === 0) {
+    const userMainData = await getMainUserData(id);
+    if (userMainData._name) {
       setIsError(true);
       setIsLoading(false);
+      setErrorData(userMainData);
     } else {
-      setUserMainData(dataArray[0]);
+      setUserMainData(userMainData);
       setIsLoading(false);
     }
-    console.log(dataArray);
   };
 
   useEffect(() => {
-    console.log(id);
     getUserData(id);
-    // axios
-    //   .get('../mockedData.json')
-    //   .then((res) => setUserMainData(res.data.USER_MAIN_DATA))
-    //   .then(() => {
-    //     setIsLoading(false);
-    //   });
   }, [id]);
 
-  if (isLoading === true) return <p>Données en cours de chargement</p>;
+  if (isLoading) return <p>Données en cours de chargement</p>;
 
-  if (error === true) return <NotFound />;
+  if (error) return <NotFound errorData={errorData} />;
 
   if (!isLoading && !error)
     return (
       <div>
-        <h1>
-          {userMainData.userInfos.firstName +
-            ' ' +
-            userMainData.userInfos.lastName}
-        </h1>
+        <h1>{userMainData.firstName + ' ' + userMainData.lastName}</h1>
       </div>
     );
 };
