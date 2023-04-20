@@ -11,6 +11,7 @@ import ActivityChart from '../../components/activityChart/ActivityChart';
 import TimeSessionsChart from '../../components/TimeSessionsChart/TimeSessionsChart';
 import { SpecificError } from '../../scripts/2_models/ErrorData';
 import PerformanceChart from '../../components/performanceChart/PerformanceChart';
+import TodayScoreChart from '../../components/todayScoreChart/TodayScoreChart';
 
 /**
  * React component given the HTML structure of the user page
@@ -58,6 +59,7 @@ const User = () => {
           <ActivityChart id={id} />
           <TimeSessionsChart id={id} />
           <PerformanceChart id={id} />
+          <TodayScoreChart score={userMainData.todayScore} />
         </main>
         <aside>
           <div className="aside-container" id="caloriesInfos">

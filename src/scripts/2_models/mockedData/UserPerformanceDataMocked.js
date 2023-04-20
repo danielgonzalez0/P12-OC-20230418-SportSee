@@ -14,10 +14,10 @@ export const kindMappingTable = (kind) => {
     { en: 'speed', fr: 'Vitesse' },
     { en: 'intensity', fr: 'Intensité' },
   ];
-  return mapping.map((mappedKind) => {
+ return  mapping.map((mappedKind) => {
     if (kind === mappedKind.en) {
       return mappedKind.fr;
-    }
+    } else return null
   });
 };
 

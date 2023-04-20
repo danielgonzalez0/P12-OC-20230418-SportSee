@@ -5,6 +5,7 @@ export class UserMainDataMocked {
     this._lastName = user[0].userInfos.lastName;
     this._age = user[0].userInfos.age;
     this._todayScore = user[0].todayScore;
+    this._score = user[0].score;
     this._calorieCount = user[0].keyData.calorieCount;
     this._proteinCount = user[0].keyData.proteinCount;
     this._carbohydrateCount = user[0].keyData.carbohydrateCount;
@@ -24,7 +25,11 @@ export class UserMainDataMocked {
     return this._age;
   }
   get todayScore() {
-    return this._todayScore;
+    if (this._todayScore) {
+      return this._todayScore;
+    } else {
+      return this._score;
+    }
   }
   get calorieCount() {
     return this._calorieCount;
