@@ -10,6 +10,7 @@ import lipidIcon from '../User/fat-icon.png';
 import ActivityChart from '../../components/activityChart/ActivityChart';
 import TimeSessionsChart from '../../components/TimeSessionsChart/TimeSessionsChart';
 import { SpecificError } from '../../scripts/2_models/ErrorData';
+import PerformanceChart from '../../components/performanceChart/PerformanceChart';
 
 /**
  * React component given the HTML structure of the user page
@@ -56,6 +57,7 @@ const User = () => {
         <main>
           <ActivityChart id={id} />
           <TimeSessionsChart id={id} />
+          <PerformanceChart id={id} />
         </main>
         <aside>
           <div className="aside-container" id="caloriesInfos">

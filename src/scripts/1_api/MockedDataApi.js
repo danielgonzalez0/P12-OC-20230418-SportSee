@@ -80,4 +80,29 @@ export class MockedDataApi extends Api {
       return error;
     }
   }
+
+  /**
+   * get user performance data from mocked database
+   * @param {string} id
+   * @returns {Array} array with user performance data from mocked database
+   */
+  async getUserPerformanceDataMocked(id) {
+    try {
+      const data = await this.getData();
+      if (
+        data instanceof SpecificError === false &&
+        data instanceof Error === false
+      ) {
+        const userDataArray = data.USER_PERFORMANCE.filter(
+          (user) => user.userId === parseInt(id)
+        );
+        return userDataArray;
+      } else {
+        throw data;
+      }
+    } catch (err) {
+      const error = err;
+      return error;
+    }
+  }
 }
