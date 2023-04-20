@@ -19,7 +19,10 @@ export const getMainUserData = async (id) => {
       throw new SpecificError('Erreur404', "La page n'existe pas");
     } else {
       const getData = await new GetMainDataFromDB(url, id, getType);
-      if (getData instanceof SpecificError === true) {
+      if (
+        getData instanceof SpecificError === true ||
+        getData instanceof Error === true
+      ) {
         throw getData;
       } else {
         if (getData.length > 0) {

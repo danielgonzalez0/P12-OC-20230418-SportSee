@@ -1,13 +1,13 @@
 import { MockedDataApi } from '../1_api/MockedDataApi';
 import { SpecificError } from '../2_models/ErrorData';
-import { UserActivityDataMocked } from '../2_models/mockedData/UserActivityDataMocked';
+import { UserSessionsDataMocked } from '../2_models/mockedData/UserSessionsDataMocked';
 
-export class GetActivityDataFromDB {
+export class GetSessionDurationDataFromDB {
   constructor(url, id, type) {
     switch (type) {
       case 'mocked':
         const data = new MockedDataApi(url);
-        const result = data.getUserActivityDataMocked(id);
+        const result = data.getUserSessionsDataMocked(id);
         return result;
       case 'backend-server':
         return console.log('not implemented yet');
@@ -21,11 +21,11 @@ export class GetActivityDataFromDB {
   }
 }
 
-export class UserDataActivity {
+export class UserDataSessionDuration {
   constructor(data, type) {
     switch (type) {
       case 'mocked':
-        return new UserActivityDataMocked(data);
+        return new UserSessionsDataMocked(data);
       case 'backend-server':
         return console.log('not implemented yet');
       default:

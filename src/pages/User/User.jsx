@@ -8,6 +8,8 @@ import proteinIcon from '../User/protein-icon.png';
 import glucidIcon from '../User/carbs-icon.png';
 import lipidIcon from '../User/fat-icon.png';
 import ActivityChart from '../../components/activityChart/ActivityChart';
+import TimeSessionsChart from '../../components/TimeSessionsChart/TimeSessionsChart';
+import { SpecificError } from '../../scripts/2_models/ErrorData';
 
 /**
  * React component given the HTML structure of the user page
@@ -26,7 +28,10 @@ const User = () => {
    */
   const getUserData = async (id) => {
     const userMainData = await getMainUserData(id);
-    if (userMainData._name) {
+    if (
+      userMainData instanceof SpecificError === true ||
+      userMainData instanceof Error === true
+    ) {
       setIsError(true);
       setIsLoading(false);
       setErrorData(userMainData);
@@ -49,7 +54,8 @@ const User = () => {
       <div>
         <h1>Bonjour {userMainData.firstName}</h1>
         <main>
-          <ActivityChart id={id}/>
+          <ActivityChart id={id} />
+          <TimeSessionsChart id={id} />
         </main>
         <aside>
           <div className="aside-container" id="caloriesInfos">

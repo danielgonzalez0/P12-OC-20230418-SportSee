@@ -11,7 +11,7 @@ const ActivityChart = ({ id }) => {
   const [userActivityData, setUserActivityData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setIsError] = useState(false);
-  //   const [errorData, setErrorData] = useState({});
+  const [errorData, setErrorData] = useState({});
 
   /**
    * get user data from the API and handle errors
@@ -21,11 +21,11 @@ const ActivityChart = ({ id }) => {
     const userData = await getUserDataActivity(id);
     if (userData.id === parseInt(id)) {
       setUserActivityData(userData);
-      setTimeout(()=>setIsLoading(false), 1000);
+      setTimeout(() => setIsLoading(false), 1000);
     } else {
       setIsError(true);
       setIsLoading(false);
-      //   setErrorData(userData);
+      setErrorData(userData);
     }
   };
 
@@ -35,21 +35,31 @@ const ActivityChart = ({ id }) => {
 
   if (isLoading) return <p>En cours de chargement</p>;
 
-  if (error) return <p>Données indisponibles</p>;
+  if (error)
+    return (
+      <div className="error">
+        <p>{errorData._name}</p>
+        <p>{errorData._message}</p>
+      </div>
+    );
 
-  return (
-    <div className="activityChart-Container">
-      <p>chart Activity</p>
-      <p>{userActivityData.id}</p>
-      <ul>
-        {userActivityData.sessions.map((session, index) => (
-          <li key={index}>
-            day: {session.day} cal: {session.calories} kg: {session.kilogram}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+      if (!isLoading && !error)
+        return (
+          <div className="activityChart-Container">
+            <p>chart Activity</p>
+            <p>{userActivityData.id}</p>
+            <ul>
+              {userActivityData.sessions.map((session, index) => (
+                <li key={index}>
+                  day: {session.day} cal: {session.calories} kg:{' '}
+                  {session.kilogram}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          
+        );
 };
 
 ActivityChart.propTypes = {

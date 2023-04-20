@@ -6,15 +6,15 @@ export class GetMainDataFromDB {
   constructor(url, id, type) {
     switch (type) {
       case 'mocked':
-        const data = new MockedDataApi(url)
+        const data = new MockedDataApi(url);
         const result = data.getUserMainDataMocked(id);
-        return result
+        return result;
       case 'backend-server':
         return console.log('not implemented yet');
       default:
         const error = new SpecificError(
           'Erreur 400',
-          'Appel requête HTTP: type de format inconnu'
+          'La requête HTTP a échoué: type de format inconnu'
         );
         return error;
     }
